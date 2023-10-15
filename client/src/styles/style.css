@@ -1,0 +1,154 @@
+@import url("https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700&family=Montserrat:wght@500&display=swap");
+body {
+  background-color: #f8f0e5;
+  color: #272829;
+  font-family: "Montserrat", sans-serif;
+  font-size: 18px;
+}
+.container {
+  margin: 0 300px;
+}
+.red {
+  color: #c70039;
+}
+
+/* HEADER */
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 40px;
+}
+.app-name-link {
+  text-decoration: none;
+  font-size: 40px;
+}
+
+.nav-link {
+  margin: 0 15px;
+  color: #272829;
+  text-decoration: none;
+}
+.nav-link:hover {
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+/* LANDING */
+
+.landing-main {
+  margin-top: 130px;
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.landing-img {
+  width: 600px;
+  height: 500px;
+  border-radius: 20%;
+}
+
+.landing-title {
+  margin-top: 0;
+  font-size: 70px;
+  font-family: "Big Shoulders Display", sans-serif;
+}
+
+.search-bar-container {
+  margin-top: 60px;
+}
+
+/* SEARCH BAR */
+
+.search-bar-input {
+  margin: 0;
+  width: 500px;
+  height: 50px;
+  border-radius: 100px;
+  text-indent: 30px;
+  color: #272829;
+  font-size: 20px;
+}
+
+/* LOGIN */
+
+.login-container {
+  margin-top: 130px;
+  text-align: center;
+}
+.login-form {
+  padding: 80px 50px;
+  background-color: white;
+  display: inline-block;
+  border-radius: 20px;
+}
+.login-form input {
+  font-family: "Montserrat", sans-serif;
+  font-size: 20px;
+  text-indent: 12px;
+  height: 40px;
+  width: 400px;
+  margin: 20px 0;
+  border-radius: 20px;
+}
+
+.btn {
+  font-family: "Montserrat", sans-serif;
+  color: white;
+  font-size: 20px;
+  margin-top: 10px;
+  padding: 20px 100px;
+  border: none;
+  border-radius: 25px;
+  background-color: #c70039;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #a30032;
+}
+
+.definition-text {
+  font-family: "Montserrat", sans-serif;
+  margin-top: 50px;
+  min-height: 670px;
+  min-width: 1000px;
+  border-radius: 10px;
+  padding-left: 20px;
+  font-size: 22px;
+  background-color: #faf8f1;
+  resize: none;
+}
+
+.search-main {
+  display: flex;
+  justify-content: space-between;
+}
+.definition-container {
+  text-align: right;
+}
+
+.word-list {
+  margin-top: 50px;
+  max-height: 700px;
+  width: 300px;
+  overflow: scroll;
+}
+
+.word-list::-webkit-scrollbar {
+  color: black;
+  background-color: white;
+  border-radius: 6px;
+}
+
+.word-list::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  background-clip: content-box;
+  background-color: #d55959;
+}
+
+.word-list-item:hover {
+  cursor: pointer;
+  color: #c70039;
+}
