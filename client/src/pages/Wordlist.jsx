@@ -53,10 +53,7 @@ function Wordlist() {
         }),
       })
         .then((res) => res.json())
-        .then((data) => {
-          console.log(data);
-          setUserList(data);
-        })
+        .then((data) => setUserList(data))
         .catch((error) => console.log("Error", error));
     } else {
       navigate("/login");
@@ -64,7 +61,7 @@ function Wordlist() {
   }
 
   function handleClick(event) {
-    console.log(event.target.innerText);
+   
     const foundWord = userList.find(
       (word) => word.word === event.target.innerText
     );

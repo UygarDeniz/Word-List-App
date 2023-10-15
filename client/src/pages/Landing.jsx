@@ -10,14 +10,14 @@ function Landing() {
       <main className="landing-main">
         <div>
           <h1 className="landing-title">
-            Build Your Word List Now
+            Build Your Word List 
             <br />
-            Practice it Later
+            With Definitions Now
           </h1>
           <p>
             Search for a word that you want to learn and save it to your list.
             <br />
-            Access to your list any time and practice
+            Access to your list any time and practice your vocabulary.
           </p>
           <div className="search-bar-container">
             <h2 className="red">Start Now</h2>

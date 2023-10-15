@@ -73,7 +73,6 @@ app.get("/api/search/:word", (req, res) => {
 app.post("/api/login", (req, res) => {
   const username = req.body.userName;
   const password = req.body.password;
-
   User.findOne({
     username: username,
   })
@@ -122,6 +121,7 @@ app.post("/api/wordlist/save", (req, res) => {
   const word = req.body.word;
   const decoded = jwt.verify(token, secret);
   const username = decoded.username;
+ 
   User.findOne({
     username: username,
   }).then((user) => {
@@ -166,7 +166,7 @@ app.get("*", function (request, response) {
   response.sendFile(path.resolve(__dirname, "./client/dist", "index.html"));
 });
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
+
+app.listen(process.env.PORT || 5000, () => {
   console.log("Listening on port 5000!");
 });

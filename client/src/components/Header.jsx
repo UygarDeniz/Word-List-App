@@ -6,7 +6,7 @@ function Header() {
   return (
     <header>
       <div className="header-container">
-        <Link to="/" className="app-name-link red">Word List</Link>
+        <Link to="/" className="app-name-link red">Word List <br/>Builder</Link>
         <SearchBar />
 
         <nav>

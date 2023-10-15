@@ -7,7 +7,6 @@ function SearchBar() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    console.log(searchWord);
     navigate(`/wordlist/${searchWord}`);
   }
 
