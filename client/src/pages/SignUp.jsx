@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../components/Header.jsx";
-
+import Button from "../components/Button.jsx";
 function SignUp() {
   const [userData, setUserData] = useState({ userName: "", password: "" });
   const [message, setMessage] = useState("")
@@ -65,7 +65,7 @@ function SignUp() {
             required
           />
           <br />
-          <button className="btn">Sign Up</button>
+          <Button text="Sign Up">Sign Up</Button>
         </form>
       </main>
     </div>

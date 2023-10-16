@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Header from "../components/Header";
 import questions from "./testData.js";
 import "../styles/style.css";
+import Button from "../components/Button";
 
 function Test() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -70,7 +71,7 @@ function Test() {
           </div>
           : <div className="game-end"> 
                 <h1>Game Ended</h1>
-                <button className="btn" onClick={handlePlayAgain}>Play Again</button>
+                <Button text="Play Again" onClick={handlePlayAgain}/>
           </div>}
         </div>
       </main>

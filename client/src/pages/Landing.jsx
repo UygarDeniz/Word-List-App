@@ -21,7 +21,7 @@ function Landing() {
           </p>
           <div className="search-bar-container">
             <h2 className="red">Start Now</h2>
-            <SearchBar />
+            <SearchBar classes="search-bar-input landing-search" />
           </div>
         </div>
 

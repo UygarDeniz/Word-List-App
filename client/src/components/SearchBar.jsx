@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/style.css";
-function SearchBar() {
+function SearchBar(props) {
   const [searchWord, setSearchWord] = useState("");
   const navigate = useNavigate();
 
@@ -14,8 +14,8 @@ function SearchBar() {
     <form onSubmit={handleSubmit}>
       <input
         type="text"
-        className="search-bar-input"
-        placeholder="Search for a word"
+        className={props.classes}        
+        placeholder="Search a word"
         value={searchWord}
         onChange={(e) => setSearchWord(e.target.value)}
       />

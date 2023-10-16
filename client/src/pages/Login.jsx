@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Header from "../components/Header.jsx";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Button from "../components/Button.jsx";
 import "../styles/style.css";
 
@@ -66,6 +66,7 @@ function Login() {
           <br />
           <Button text="Login" />
         </form>
+          <h3>Don't have an account? <Link to="/signup">Sing Up</Link></h3>
       </main>
     </div>
   );

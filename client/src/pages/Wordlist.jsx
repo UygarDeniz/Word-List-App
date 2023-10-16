@@ -95,7 +95,7 @@ function Wordlist() {
               onChange={(e) =>
                 setText((prev) => ({ ...prev, text: e.target.value }))
               }
-              maxlenght={50}
+             
             />
             <Button text="Save" />
           </form>
