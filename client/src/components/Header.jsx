@@ -10,9 +10,9 @@ function Header() {
         <SearchBar />
 
         <nav>
-          <Link to="/" className="nav-link">Home</Link>
-          <span>|</span>
           <Link to="/wordlist" className="nav-link">Word List</Link>
+          <span>|</span>
+          <Link to="/test" className="nav-link">Vocabulary Test</Link>
           <span>|</span>
           {localStorage.getItem("token") ? <Link to="/logout" className="nav-link">Log Out</Link>
           : <>
