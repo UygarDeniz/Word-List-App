@@ -39,8 +39,8 @@ function Test() {
   }
 
   function handlePlayAgain() {
-    setGameEnd(false);
     setCurrentQuestion(0);
+    setGameEnd(false);
     setScore({true: 0, false: 0});
   }
 
@@ -71,7 +71,7 @@ function Test() {
           </div>
           : <div className="game-end"> 
                 <h1>Game Ended</h1>
-                <Button text="Play Again" onClick={handlePlayAgain}/>
+                <button className="btn" onClick={handlePlayAgain}>Play Again</button>
           </div>}
         </div>
       </main>

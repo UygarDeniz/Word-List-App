@@ -311,6 +311,11 @@ body {
   }
 }
 @media (max-width: 558px) {
+
+  .login-form {
+    padding: 80px 20px;
+
+  }
   .questions {
     min-width: 400px;
     height: 100px;
@@ -338,6 +343,16 @@ body {
   }
   .landing-search {
     width: 400px;
+  }
+  .login-form {
+    padding: 80px 20px;
+
+  }
+  .login-form input {
+    width: 300px;
+  }
+  .login-container{
+    margin-top: 50px;
   }
 }
 
