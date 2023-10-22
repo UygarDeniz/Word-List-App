@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import Comment from "../components/comment.jsx";
+import Comment from "../components/Comment.jsx";
 import Header from "../components/Header.jsx";
 import Button from "../components/Button.jsx";
 
@@ -20,6 +20,7 @@ function Thread() {
         `Bearer ${localStorage.getItem("token")}`
       );
     }
+    
     fetch(`/api/threads/${params.id}`, {
       method: "GET",
       headers: headers,
