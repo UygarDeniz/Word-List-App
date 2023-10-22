@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Header from "../components/Header.jsx";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "../components/Button.jsx";
-import "../styles/style.css";
+
 
 function Login() {
   const [userData, setUserData] = useState({ userName: "", password: "" });

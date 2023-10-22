@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "../styles/style.css";
+
 function SearchBar(props) {
   const [searchWord, setSearchWord] = useState("");
   const navigate = useNavigate();
@@ -11,7 +11,7 @@ function SearchBar(props) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="search-form"onSubmit={handleSubmit}>
       <input
         type="text"
         className={props.classes}        
