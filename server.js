@@ -10,7 +10,7 @@ import Thread from "./models/thread.js";
 import Comment from "./models/comment.js";
 import { fileURLToPath } from "url";
 import path, { dirname } from "path";
-import user from "./models/user.js";
+import bcrypt from "bcryptjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();
@@ -28,17 +28,26 @@ app.post("/api/login", async (req, res) => {
   const username = req.body.userName;
   const password = req.body.password;
 
-  const foundUser = await User.findOne({ username: username });
+  try {
+    const foundUser = await User.findOne({ username });
 
-  if (foundUser) {
-    if (foundUser.password === password) {
-      const token = jwt.sign({ username: username }, secret);
-      res.json({ success: true, token: token });
-    } else {
-      res.json({ success: false, err: "Wrong password" });
+    if (!foundUser) {
+      return res.json({ success: false, err: "User not found" });
     }
-  } else {
-    res.json({ success: false, err: "User not found" });
+
+    const isPasswordCorrect = await bcrypt.compare(
+      password,
+      foundUser.password
+    );
+
+    if (!isPasswordCorrect) {
+      return res.json({ success: false, err: "Wrong password" });
+    }
+
+    const token = jwt.sign({ username: username }, secret);
+    return res.json({ success: true, token: token });
+  } catch (error) {
+    return res.json({ success: false, error: error.message });
   }
 });
 
@@ -52,18 +61,20 @@ app.post("/api/signup", async (req, res) => {
     if (user) {
       return res.json({ success: false, message: "Username already exists" });
     } else {
+      const hashedPassword = await bcrypt.hash(password, 10);
+
       const newUser = new User({
         username: username,
-        password: password,
+        password: hashedPassword,
       });
 
       await newUser.save();
 
       const token = jwt.sign({ username: username }, secret);
-      res.json({ success: true, token: token });
+      return res.json({ success: true, token: token });
     }
   } catch (error) {
-    res.json({ success: false, error: error.massage });
+    return res.json({ success: false, error: error.massage });
   }
 });
 
@@ -100,7 +111,7 @@ app.get("/api/search/:word", async (req, res) => {
       `\n${data.word}\n_________________________________________\n\n` +
       combinedData;
 
-    res.json({ word: word, text: combinedData });
+    return res.json({ word: word, text: combinedData });
   } catch (error) {
     console.log(error);
   }
@@ -131,9 +142,9 @@ app.post("/api/wordlist/save", async (req, res) => {
       await user.save();
     }
     const sortedWords = user.wordlist.sort((a, b) => b.date - a.date);
-    res.json(sortedWords);
+    return res.json(sortedWords);
   } catch (error) {
-    res.json(error);
+    return res.json(error);
   }
 });
 
@@ -146,22 +157,22 @@ app.post("/api/wordlist", async (req, res) => {
     const user = await User.findOne({ username }).populate("wordlist");
 
     if (user) {
-      res.json(user.wordlist);
+      return res.json(user.wordlist);
     } else {
-      res.json({ success: false });
+      return res.json({ success: false });
     }
   } catch (error) {
     console.error(error);
-    res.json({ success: false, error: error.massage });
+    return res.json({ success: false, error: error.massage });
   }
 });
 
 app.get("/api/threads", async (req, res) => {
   try {
     const threads = await Thread.find().sort({ date: -1 });
-    res.json(threads);
+    return res.json(threads);
   } catch (error) {
-    res.json({ success: false, error: error.message });
+    return res.json({ success: false, error: error.message });
   }
 });
 
@@ -179,9 +190,9 @@ app.delete("/api/wordlist", async (req, res) => {
 
     await Word.findByIdAndDelete(word_id);
 
-    res.json(user.wordlist);
+    return res.json(user.wordlist);
   } catch (error) {
-    res.json({ success: false, error: error.message });
+    return res.json({ success: false, error: error.message });
   }
 });
 app.post("/api/threads", async (req, res) => {
@@ -209,10 +220,10 @@ app.post("/api/threads", async (req, res) => {
 
     const thread = await newThread.save();
 
-    res.status(201).json(thread._id);
+    return res.status(201).json(thread._id);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: error.message });
+    return res.status(500).json({ error: error.message });
   }
 });
 
@@ -244,7 +255,7 @@ app.get("/api/threads/:id", async (req, res) => {
         isAuthor: comment.postedBy.username === username,
       }));
 
-      res.json({ thread: { ...thread.toObject(), comments }, isOwner });
+      return res.json({ thread: { ...thread.toObject(), comments }, isOwner });
     }
   } catch (err) {
     console.log(err);
@@ -262,9 +273,9 @@ app.delete("/api/threads/:id", async (req, res) => {
     const deletedThread = await Thread.findByIdAndDelete(thread_id);
 
     await Comment.deleteMany({ _id: { $in: deletedThread.comments } });
-    res.status(200).json({ message: "Thread and comments deleted" });
+    return res.status(200).json({ message: "Thread and comments deleted" });
   } catch (err) {
-    res.status(500).json({
+    return res.status(500).json({
       error: err.message,
     });
   }
@@ -313,9 +324,9 @@ app.post("/api/threads/:id", async (req, res) => {
       isAuthor: comment.postedBy.username === username,
     }));
 
-    res.json({ thread: { ...updatedThread.toObject(), comments } });
+    return res.json({ thread: { ...updatedThread.toObject(), comments } });
   } catch (error) {
-    res.json({ success: false, error: error.message });
+    return res.json({ success: false, error: error.message });
   }
 });
 
@@ -336,7 +347,7 @@ app.delete("/api/threads/:threadId/comments/:commentId", async (req, res) => {
     if (!comment) {
       return res.status(404).json({ message: "Comment not found" });
     }
-    console.log(comment.postedBy.username, username)
+    console.log(comment.postedBy.username, username);
     if (comment.postedBy.username !== username) {
       return res.status(403).json({ message: "Forbidden" });
     }
@@ -346,7 +357,7 @@ app.delete("/api/threads/:threadId/comments/:commentId", async (req, res) => {
     await Thread.findByIdAndUpdate(threadId, {
       $pull: { comments: commentId },
     });
-    
+
     res.status(200).json({ message: "Comment deleted" });
   } catch (err) {
     console.error(err);

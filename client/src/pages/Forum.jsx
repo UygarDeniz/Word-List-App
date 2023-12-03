@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation, useParams } from "react-router-dom";
 import Row from "../components/Forum-row.jsx";
 import Header from "../components/Header.jsx";
 
 function Forum() {
-  const [threads, setThreads] = useState();
+  const [threads, setThreads] = useState([]);
   const navigate = useNavigate();
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const searchQuery = searchParams.get("search");
+  
   useEffect(() => {
     fetch(`/api/threads`)
       .then((res) => res.json())
@@ -14,8 +18,18 @@ function Forum() {
         console.log(error);
       });
   }, []);
+
   function handleClick(event) {
     navigate("/forum/threads/new");
+  }
+  
+  function filter(threads) {
+    if (!searchQuery) {
+      return threads;
+    }
+    return threads.filter((thread) =>
+      thread.title.toLowerCase().includes(searchQuery.toLowerCase())
+    );
   }
   return (
     <div className="container">
@@ -28,7 +42,7 @@ function Forum() {
           </button>
         </div>
         <div>
-          {threads?.map((thread) => {
+          {filter(threads)?.map((thread) => {
             return (
               <Row
                 key={thread._id}

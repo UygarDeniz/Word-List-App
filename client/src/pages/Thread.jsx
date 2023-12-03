@@ -134,6 +134,7 @@ function Thread() {
                 value={reply.content}
                 onChange={(event) => setReply({ content: event.target.value })}
                 maxLength={1000}
+                minLength={3}
                 rows="5"
               />
               <Button text="Reply" />

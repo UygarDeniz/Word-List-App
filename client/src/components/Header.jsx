@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import SearchBar from "./SearchBar";
-import GoogleSearch from "./GoogleSearch";
+import ForumSearch from "./ForumSearch";
 
 function Header() {
   const [windowWidth, setWindowWidth] = React.useState(window.innerWidth);
@@ -27,7 +27,7 @@ function Header() {
               Forum
               <br />
             </Link>
-            <GoogleSearch />
+            <ForumSearch />
           </>
         ) : (
           <>
@@ -72,6 +72,10 @@ function Header() {
               <Link to="/test" className="nav-link">
                 Vocabulary Test
               </Link>
+              <Link to="/forum" className="nav-link">
+                Forum
+              </Link>
+
               {localStorage.getItem("token") ? (
                 <Link to="/logout" className="nav-link">
                   Log Out

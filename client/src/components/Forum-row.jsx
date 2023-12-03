@@ -5,7 +5,7 @@ function Row(props) {
     <div className="row">
       <div className="row-content">
         <a href={`/forum/threads/${props.id}`}>
-          {props.title.lenght < 100
+          {props.title.length < 100
             ? props.title
             : props.title.slice(0, 100) + "..."}
         </a>

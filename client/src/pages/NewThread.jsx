@@ -53,6 +53,7 @@ function NewThread() {
             value={threadData.title}
             onChange={handleChange}
             maxLength={100}
+            minLength={5}
           />
           <h2>Content</h2>
           <textarea
@@ -61,6 +62,7 @@ function NewThread() {
             value={threadData.content}
             onChange={handleChange}
             maxLength={1840}
+            minLength={10}
           />
           <Button text="Post" />
         </form>

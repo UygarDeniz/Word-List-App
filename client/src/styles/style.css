@@ -355,6 +355,7 @@ p {
   cursor: pointer;
 }
 
+
 /* MEDIA QUERIES */
 @media (max-width: 1750px) {
   .container {
@@ -413,7 +414,7 @@ p {
   }
   .questions {
     min-width: 400px;
-    height: 100px;
+    min-height: 500px;
   }
   .answer {
     width: 100px;

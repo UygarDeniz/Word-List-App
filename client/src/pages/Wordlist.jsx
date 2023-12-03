@@ -98,6 +98,7 @@ function Wordlist() {
         .toLowerCase()
         .includes(searchedWord.searchedWord.toLowerCase())
     );
+    
 
     if (e.target.value === "") {
       setSearchResults([]);
@@ -162,6 +163,7 @@ function Wordlist() {
               className="definition-text"
               name="definition"
               maxLength={2000}
+              minLength={3}
               value={text.text}
               onChange={(e) =>
                 setText((prev) => ({ ...prev, text: e.target.value }))
